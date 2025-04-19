@@ -1,0 +1,276 @@
+/* Import Tailwind CSS and Google Fonts */
+@import "tailwindcss";
+
+/* Global Styles */
+* {
+  overflow-x: hidden;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.landing-container {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  /* For Firefox */
+  -ms-overflow-style: none;
+  /* For Internet Explorer and Edge */
+}
+
+.landing-container::-webkit-scrollbar {
+  display: none;
+  /* For Chrome, Safari, and Opera */
+}
+
+.section {
+  width: 100%;
+  height: 100%;
+}
+
+/* Hexagon Shape */
+.clip-hexagon {
+  clip-path: polygon(50% 0%,
+      100% 25%,
+      100% 75%,
+      50% 100%,
+      0% 75%,
+      0% 25%);
+}
+
+/* Beehive Layout */
+.beehive-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.beehive-container>div:nth-child(odd) {
+  margin-top: 1.5rem;
+  /* Offset odd rows */
+}
+
+/* Retro Font */
+.retro-font {
+  font-family: "Press Start 2P", cursive;
+  /* Use a retro pixel font */
+  text-transform: uppercase;
+}
+
+/* Retro Title */
+.retro-title {
+  font-family: "Press Start 2P", cursive;
+  text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+}
+
+/* Retro Border */
+.retro-border {
+  border: 2px solid #00ff00;
+  box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+}
+
+/* GLITCH BUTTON */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* body {
+  height: 100vh;
+  width: 100%;
+  background: radial-gradient(#480d35, #17151d);
+  display: grid;
+  place-items: center;
+} */
+@font-face {
+  font-family: "Bruce Forever";
+  src: url("/fonts/Bruce-Forever.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+h1 {
+  position: relative;
+  font-family: "Bruce Forever", Arial, sans-serif;
+  color: #77e777;
+  font-size: 30px;
+  overflow: hidden;
+}
+
+h1:hover {
+  text-shadow: 0.05em 0 0 #ec2225, -0.025em -0.05em 0 #313f97,
+    0.025em 0.05em 0 #54c279;
+  color: rgba(0, 194, 203, 0.2);
+}
+
+h1:before,
+h1:after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.8;
+}
+
+h1:hover::before {
+  animation: glitch 650ms infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  transform: translate(-0.025em, -0.0125em);
+}
+
+h1:hover::after {
+  animation: glitch 375ms infinite;
+  clip-path: polygon(0 65%, 100% 20%, 100% 100%, 0 70%);
+  transform: translate(0.0125em, 0.025em);
+}
+
+@keyframes glitch {
+  0% {
+    color: rgba(236, 34, 37, 0.2);
+    text-shadow: 0.05em 0 0 #ec2225, -0.025em -0.05em 0 #313f97,
+      0.025em 0.05em 0 #50c878;
+  }
+
+  14% {
+    text-shadow: 0.05em 0 0 #ec2225, -0.025em -0.05em 0 #313f97,
+      0.025em 0.05em 0 #50c878;
+  }
+
+  15% {
+    color: #50c878;
+    text-shadow: -0.05em -0.025em 0 #ec2225, 0.025em -0.025em 0 #313f97,
+      -0.05em -0.05em 0 #50c878;
+  }
+
+  49% {
+    text-shadow: -0.05em -0.025em 0 #ec2225, 0.025em -0.025em 0 #313f97,
+      -0.05em -0.05em 0 #50c878;
+  }
+
+  50% {
+    text-shadow: 0.025em 0.05em 0 #ec2225, -0.025em 0.05em 0 #313f97,
+      0 -0.05em 0 #50c878;
+  }
+
+  99% {
+    color: #313f97;
+    text-shadow: 0.025em 0.05em 0 #ec2225, -0.025em 0.05em 0 #313f97,
+      0 -0.05em 0 #50c878;
+  }
+
+  100% {
+    text-shadow: -0.025em 0 0 #ec2225, -0.025em -0.025em 0 #313f97,
+      -0.025em -0.05em 0 #50c878;
+  }
+}
+
+/* Infinite scrolling animation */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(100%);
+    /* Start from the right */
+  }
+
+  100% {
+    transform: translateX(-100%);
+    /* Move to the left */
+  }
+}
+
+/* Infinite scrolling animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+    /* Start at the initial position */
+  }
+
+  100% {
+    transform: translateX(-100%);
+    /* Move left by 100% of the container width */
+  }
+}
+
+.animate-scroll {
+  display: flex;
+  gap: 1rem;
+  /* Space between items */
+  animation: scroll 15s linear infinite;
+  /* 15s for smooth infinite scrolling */
+  width: max-content;
+  /* Ensure the content width adjusts dynamically */
+}
+
+.relative>div {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+}
+
+.relative>div>div {
+  position: relative;
+  animation: scroll-left 10s linear infinite;
+}
+
+.btn {
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+}
+
+.btn:hover .btn-slide-show-text1 {
+  margin-left: 65px;
+}
+
+.margin-top-button {
+  margin-top: 30px;
+}
+
+.btn-background-slide {
+  width: 180px;
+  padding: 6px;
+  height: 50px;
+  color: #77e777;
+  text-align: center;
+  position: relative;
+  border: 2px solid #77e777;
+  overflow: hidden;
+  transition: 0.2s cubic-bezier(0.55, 0, 0.1, 1);
+  cursor: pointer;
+  box-shadow: #77e777 0px 0px 0px;
+}
+
+.btn-background-slide:hover {
+  box-shadow: #77e777 8px 8px 0px, #77e777 -8px -8px 0px;
+}
+
+.btn-background-slide:hover .btn-background-slide-bg {
+  opacity: 1;
+  transform: translateZ(0px);
+}
