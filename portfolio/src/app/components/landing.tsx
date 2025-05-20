@@ -1,116 +1,90 @@
-"use client";
-
-import React, { useRef, useState, useEffect } from "react";
-import dynamic from "next/dynamic";
-import { useFrame } from "@react-three/fiber";
-import * as THREE from "three"; // Import THREE for type definitions
+import React from "react";
 import "../globals.css";
-
-const Canvas = dynamic(
-  () => import("@react-three/fiber").then((mod) => mod.Canvas),
-  { ssr: false }
-);
-
-function InteractiveBox() {
-  const meshRef = useRef<THREE.Mesh | null>(null); // Explicitly type the ref
-  const [hovered, setHovered] = useState(false); // State for hover effect
-  const [clicked, setClicked] = useState(false); // State for click effect
-  const mousePosition = useRef({ x: 0, y: 0 }); // Track mouse position
-  const lastMouseMove = useRef(Date.now()); // Track last mouse movement time
-
-  // Update mouse position globally
-  useEffect(() => {
-    const handleMouseMove = (event: MouseEvent) => {
-      const { clientX, clientY } = event;
-      const x = (clientX / window.innerWidth) * 2 - 1; // Normalize to -1 to 1
-      const y = -(clientY / window.innerHeight) * 2 + 1; // Normalize to -1 to 1
-      mousePosition.current = { x, y };
-      lastMouseMove.current = Date.now(); // Update last movement time
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
-
-  // Rotate the box based on mouse movement or slowly when idle
-  useFrame(() => {
-    if (meshRef.current) {
-      const { x, y } = mousePosition.current;
-      const now = Date.now();
-
-      // If mouse hasn't moved recently, rotate slowly
-      if (now - lastMouseMove.current > 500) {
-        meshRef.current.rotation.x += 0.005; // Slow rotation on X-axis
-        meshRef.current.rotation.y += 0.005; // Slow rotation on Y-axis
-      } else {
-        // Rotate based on mouse position (slower movement)
-        meshRef.current.rotation.x +=
-          (y * Math.PI - meshRef.current.rotation.x) * 0.02;
-        meshRef.current.rotation.y +=
-          (x * Math.PI - meshRef.current.rotation.y) * 0.02;
-      }
-    }
-  });
-
-  return (
-    <mesh
-      ref={meshRef}
-      scale={clicked ? 1.5 : 1} // Scale up when clicked
-      onClick={() => setClicked(!clicked)} // Toggle click state
-      onPointerOver={() => setHovered(true)} // Set hover state
-      onPointerOut={() => setHovered(false)} // Reset hover state
-      castShadow
-      receiveShadow
-    >
-      <boxGeometry args={[2, 2, 2]} />
-      <meshStandardMaterial
-        color={hovered ? "lime" : "green"}
-        emissive="lime"
-        emissiveIntensity={0.5}
-        wireframe={false}
-      />
-    </mesh>
-  );
-}
-
 export default function Landing() {
   return (
-    <div
-      style={{ backgroundColor: "#070F1A" }}
-      className="w-screen h-screen overflow-x-hidden overflow-y-scroll scrollbar-hide landing-container"
-    >
-      <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 auto-rows-auto place-items-center">
-        {/* Left Div */}
-        <div className="w-full h-full flex flex-col items-center justify-center text-center px-4 md:px-8">
-          <h2 className="text-xl md:text-4xl font-bold text-green-400 leading-tight">
-            A <span className="text-blue-500">Frontend & Game Developer</span>{" "}
-            <br />
-            Crafting Engaging Experiences <br />
-            and Helping Ideas Come to Life
-          </h2>
-          <p className="text-gray-300 text-sm md:text-lg leading-relaxed max-w-sm md:max-w-lg mb-5">
-            I am a software engineer with more than four years of experience.
-            Recognized as a practical and effective developer, I specialize in
-            creating inspiring UI designs and engaging user experiences to bring
-            imaginative ideas to life.
-          </p>
-          <button className="btn btn-background-slide flex items-center justify-center text-[#77e777] border-[#77e777] margin-top-button">
-            <h1 className="text-lg font-bold">START</h1>
-            <div className="btn-background-slide--pink btn-background-slide-bg"></div>
-          </button>
+    <div>
+      <div
+        className="w-full h-screen flex flex-col"
+        style={{
+          backgroundImage: `url('/assets/greenlanding.jpg')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="w-full flex justify-center items-center text-center gap-10 py-2 special_padding ">
+          {/* flex align-content-center justify-content-center text-center */}
+          {/* flex justify-center items-center text-center gap-8 py-2 */}
+          <p className="topnavtext applefont">About</p>
+          <p className="topnavtext applefont">Experience</p>
+          <p className="topnavtext applefont">Projects</p>
+          <p className="topnavtext applefont">Education</p>
+          <p className="topnavtext applefont">Contact</p>
         </div>
-
-        {/* Right Div */}
-        <div className="w-full h-full flex items-center justify-center text-white">
-          <Canvas shadows>
-            <ambientLight intensity={0.3} />
-            <pointLight position={[10, 10, 10]} intensity={1} castShadow />
-            <InteractiveBox />
-            <mesh receiveShadow position={[0, -2, 0]}>
-              <planeGeometry args={[10, 10]} />
-              <shadowMaterial opacity={0.5} />
-            </mesh>
-          </Canvas>
+        <div className=" w-full flex-1 flex flex-col justify-center items-center text-center">
+          {/* to give 100% height give parent flex flex-col and give child flex-1 */}
+          <p
+            className="hellometext applefont text-white font-extrabold text-5xl"
+            style={{ color: "#DDF6FF" }}
+          >
+            Hi, I`m Alexis P. Magaway Jr.
+          </p>
+          <p className="text-white applefont font-extrabold text-3xl fullstack_margin">
+            A Full-Stack Developer
+          </p>
+          <div className="flex gap-5 fullstack_margin">
+            <button className="landing_button applefont projects">
+              Projects
+            </button>
+            <button className="landing_button applefont contact">
+              Contact Me
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        className="bg-red-50 h-auto min-h-screen"
+        style={{ backgroundColor: "#070F1A" }}
+      >
+        <h1>hello world</h1>
+        <div className="w-full h-screen text-center text-white grid grid-cols-2">
+          <div className=" h-full flex flex-col justify-center items-center">
+            <p
+              className="italic text-8xl font-bold"
+              style={{ color: "#41B3B7" }}
+            >
+              ABOUT
+            </p>
+            <p
+              className="italic text-9xl font-extrabold text-transparent me_neg_margin"
+              style={{
+                WebkitTextStroke: "2px white", // for better stroke than text-shadow
+              }}
+            >
+              ME
+            </p>
+            <div className="flex gap-10">
+              <li className="ion--logo-github aboutmeIcons"></li>
+              <li className="devicon-plain--linkedin aboutmeIcons"></li>
+              <li className="mdi--gmail aboutmeIcons"></li>
+            </div>
+            <div className="flex gap-5" style={{ padding: "23px 0" }}>
+              <button className="aboutme_button projects flex items-center gap-3">
+                Download CV{" "}
+                <span className="line-md--file-download-filled"></span>
+              </button>
+              <button className="aboutme_button contact flex items-center gap-3">
+                View Projects <span className="fluent--code-24-regular"></span>
+              </button>
+            </div>
+          </div>
+          <div className="h-full flex justify-start items-center">
+            <div className="applefont text-xl text-left max-w-xl">
+              I am a software engineer with more than four years of experience.
+              Recognized as a practical and effective developer, I specialize in
+              creating inspiring UI designs and engaging user experiences to
+              bring imaginative ideas to life.
+            </div>
+          </div>
         </div>
       </div>
     </div>
