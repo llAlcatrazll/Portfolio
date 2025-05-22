@@ -1,0 +1,20 @@
+[
+  {
+    "location_date": "@DSSC - COR JESU COLLEGE | 2023 - 2025",
+    "description_1": "Main developer and designer for of the project Axion a school facility booking system",
+    "description_2": "Designed and developed multiple dashboard for different user types along with a public event view only for students using school wifi",
+    "description_3": ""
+  },
+  {
+    "location_date": "@Numgebra - Masteral Commission | 2023 - 2024",
+    "description_1": "Solo developer of the mobile unity game for education for high school students",
+    "description_2": "Designed and developed 35 different stages consisting on unique game modes and interactions",
+    "description_3": "Built for all platforms and optimized for low end phones"
+  },
+  {
+    "location_date": "@Capitol - PICTO | Summer 2024",
+    "description_1": "Co-Developer of the government ticketing system for IT Helpdesk",
+    "description_2": "",
+    "description_3": "Scalable for other offices and inquiries of the Capitol Government building’s other offices"
+  }
+]
